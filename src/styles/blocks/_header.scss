@@ -1,0 +1,61 @@
+.header {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    padding-bottom: 35px;
+    border-bottom: 1px solid #F7F7F7;
+
+    &__logo {
+        display: flex;
+
+        p {
+            font-weight: 400;
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+    }
+
+    &__text {
+        margin-left: 17px;
+    }
+
+    &__title {
+        font-weight: 800;
+        font-size: 24px;
+        text-transform: uppercase;
+        color: #181818;
+        margin-bottom: 0;
+    }
+
+    &__descr {
+        color: #7B7B7B;
+    }
+
+    &__button {
+        display: inline-block;
+        width: 150px;
+        height: 50px;
+        padding: 15px 20px;
+        background-color: #FE5F1E;
+        border-radius: 30px;
+        text-decoration: none;
+
+        &_cart {
+            display: flex;
+        }
+
+        span {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+        }
+    }
+
+    &__delimiter {
+        width: 1px;
+        height: 25px;
+        background-color: rgba(255, 255, 255, 0.25);
+        margin: 0 13px;
+    }
+
+}

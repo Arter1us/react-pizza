@@ -1,14 +1,21 @@
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
+
+import Header from '../Header';
+import Navbar from '../Navbar';
+import PizzaList from '../PizzaList';
+
 
 function App() {
 
-    const { pizzas } = useSelector(state => state);
+    //const { pizzas } = useSelector(state => state);
     //const dispatch = useDispatch();
 
     return (
         <div className="wrapper">
             <div className="container">
-                <div>{pizzas}</div>
+                <Header />
+                <Navbar />
+                <PizzaList />
             </div>
         </div>
     );
