@@ -1,13 +1,54 @@
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { createSelector } from '@reduxjs/toolkit';
+
+import { fetchFilters } from "./NavbarSlice";
+import SkeletonNavbar from './SkeletonNavbar';
+
 export default function Navbar() {
+
+    const filtersSelector = createSelector(
+        (state) => state.filters.filters,
+        (filters) => {
+            console.log(filters);
+            return filters;
+        }
+    );
+
+    const filters = useSelector(filtersSelector);
+    const filtersLoadingStatus = useSelector(state => state.filters.filtersLoadingStatus);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchFilters());
+        //eslint-disable-next-line
+    }, [])
+
+    const renderFiltersList = (arr) => {
+
+        if (filtersLoadingStatus === "loading") {
+            return [...new Array(6)].map((_, i) => <SkeletonNavbar key={i} />)
+        } else if (filtersLoadingStatus === "error") {
+            return <h5 className="text-center mt-5">Ошибка загрузки</h5>
+        } else if (arr.length === 0) {
+            return (
+                <h5>Фильтров пока нет</h5>
+            )
+        }
+
+        return arr.map(({ name, label }) => {
+            return (
+                <li key={name} className="navbar__element">{label}</li>
+            )
+        })
+    };
+
+    const elements = renderFiltersList(filters);
+
     return (
         <nav className="navbar">
             <ul className="navbar__categories">
-                <li className="navbar__element">Все</li>
-                <li className="navbar__element">Мясные</li>
-                <li className="navbar__element">Вегетарианская</li>
-                <li className="navbar__element">Гриль</li>
-                <li className="navbar__element">Острые</li>
-                <li className="navbar__element">Закрытые</li>
+                {elements}
             </ul>
             <div className="sort">
                 <div className="sort__label">

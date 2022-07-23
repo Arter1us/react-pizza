@@ -1,11 +1,9 @@
-import Pizza from '../../resources/img/image2.png';
-
-export default function PizzaItem() {
+export default function PizzasListItem({ title, imageUrl, price }) {
     return (
         <>
             <li className="pizza-block">
-                <img className="pizza-block__img" src={Pizza} alt="pizza" />
-                <h3 className="pizza-block__title">Чизбургер-пицца</h3>
+                <img className="pizza-block__img" src={imageUrl} alt="pizza" />
+                <h3 className="pizza-block__title">{title}</h3>
                 <div className="pizza-block__selectors">
                     <div className="pizza-block__types">
                         <div className="pizza-block__type pizza-block__type_active">тонкое</div>
@@ -18,14 +16,13 @@ export default function PizzaItem() {
                     </div>
                 </div>
                 <div className="pizza-block__footer">
-                    <div className="pizza-block__price">от 395 ₽</div>
+                    <div className="pizza-block__price">от {price} ₽</div>
                     <button className="pizza-block__btn">
                         <p className="pizza-block__text">Добавить</p>
                         <p className="pizza-block__count">4</p>
                     </button>
                 </div>
             </li>
-
         </>
     )
 }

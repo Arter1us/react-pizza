@@ -2,7 +2,7 @@
 
 import Header from '../Header';
 import Navbar from '../Navbar';
-import PizzaList from '../PizzaList';
+import PizzasList from '../PizzasList';
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
             <div className="container">
                 <Header />
                 <Navbar />
-                <PizzaList />
+                <PizzasList />
             </div>
         </div>
     );
