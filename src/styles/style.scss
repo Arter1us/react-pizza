@@ -4,6 +4,10 @@ body {
     background-color: #FFDF8C;
 }
 
+a {
+    text-decoration: none;
+}
+
 .wrapper {
     width: calc(100vw - 100px);
     max-width: 1400px;

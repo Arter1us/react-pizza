@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 import reactPizza from '../../resources/img/image1.svg';
 
@@ -13,7 +14,7 @@ export default function Header() {
                 </div>
             </div>
             <div className="header__cart">
-                <a href="/cart.html" className="header__button header__button_cart">
+                <Link to="/cart" className="header__button header__button_cart">
                     <span className="header__price">520 ₽</span>
                     <div className="header__delimiter"></div>
                     <div className="header__count">
@@ -31,7 +32,7 @@ export default function Header() {
                         </svg>
                         <span> 3</span>
                     </div>
-                </a>
+                </Link>
             </div>
         </header>
     )

@@ -1,23 +1,22 @@
-//import { useSelector } from 'react-redux';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import { MainPage, CartPage, EmptyCartPage } from '../Pages';
 import Header from '../Header';
-import Navbar from '../Navbar';
-import PizzasList from '../PizzasList';
-
 
 function App() {
-
-    //const { pizzas } = useSelector(state => state);
-    //const dispatch = useDispatch();
-
     return (
-        <div className="wrapper">
-            <div className="container">
-                <Header />
-                <Navbar />
-                <PizzasList />
+        <Router>
+            <div className="wrapper">
+                <div className="container">
+                    <Header />
+                    <Routes>
+                        <Route path="/" element={<MainPage />} />
+                        <Route path="/cart" element={<CartPage />} />
+                        <Route path="/empty-cart" element={<EmptyCartPage />} />
+                    </Routes>
+                </div>
             </div>
-        </div>
+        </Router>
     );
 }
 
