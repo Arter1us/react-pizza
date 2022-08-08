@@ -23,13 +23,20 @@
         font-weight: 700;
         margin-right: 8px;
         margin-bottom: 12px;
+
+        &:hover {
+            background: #2C2C2C;
+            color: #FFF;
+            transition: all 0.2s;
+        }
+
+        &_active {
+            background: #2C2C2C;
+            color: #FFF;
+            transition: all 0.2s;
+        }
     }
 
-    &__element:hover {
-        background: #2C2C2C;
-        color: #FFF;
-        transition: all 0.2s;
-    }
 }
 
 .sort {
@@ -47,12 +54,18 @@
     }
 
     &__popup {
-        display: none;
+        display: block;
         position: absolute;
+        z-index: 10;
         right: 0;
         border-radius: 10px;
         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
         padding: 10px 0;
+        background: #FFF;
+
+        &_active {
+            display: block;
+        }
 
         ul {
             padding: 0;
@@ -63,6 +76,7 @@
                 font-size: 14px;
                 font-weight: 400;
                 padding: 10px 20px;
+                cursor: pointer;
 
                 &.active,
                 &:hover {

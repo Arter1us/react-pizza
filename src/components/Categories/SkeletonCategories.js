@@ -1,7 +1,7 @@
 import React from "react"
 import ContentLoader from "react-content-loader"
 
-const SkeletonNavbar = (props) => (
+const SkeletonCategories = (props) => (
     <ContentLoader
         speed={2}
         width={124}
@@ -15,4 +15,4 @@ const SkeletonNavbar = (props) => (
     </ContentLoader>
 )
 
-export default SkeletonNavbar;
+export default SkeletonCategories;

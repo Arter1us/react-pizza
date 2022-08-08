@@ -3,20 +3,27 @@ import { useHttp } from '../../hooks/http.hook';
 
 const initialState = {
     filters: [],
-    filtersLoadingStatus: 'idle'
+    filtersLoadingStatus: 'idle',
+    activeFilter: 'all'
 };
 
 export const fetchFilters = createAsyncThunk(
     'filters/fetchFilters',
     async () => {
         const { request } = useHttp();
-        return await request("https://62d412595112e98e484a1a40.mockapi.io/filters")
+        return await request(`https://62d412595112e98e484a1a40.mockapi.io/filters`)
     }
 );
 
 const filtersSlice = createSlice({
     name: 'filters',
     initialState,
+    reducers: {
+        filtersChanged: (state, action) => {
+            state.activeFilter = action.payload
+            console.log(state.activeFilter);
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchFilters.pending, state => {
@@ -33,6 +40,8 @@ const filtersSlice = createSlice({
     }
 });
 
-const { reducer } = filtersSlice;
+const { actions, reducer } = filtersSlice;
+
+export const { filtersChanged } = actions;
 
 export default reducer;

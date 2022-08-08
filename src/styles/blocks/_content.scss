@@ -1,17 +1,23 @@
 .content {
     &__grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, 280px);
+        grid-template-columns: repeat(4, minmax(280px, 1fr));
         row-gap: 50px;
-        column-gap: 46px;
+        column-gap: 15px;
         padding-left: 0;
         margin-bottom: 0;
     }
 }
 
 .pizza-block {
-    height: 459px;
+    display: flex;
+    justify-content: center;
     list-style-type: none;
+
+    &__wrapper {
+        min-width: 275px;
+        height: 459px;
+    }
 
     &__img {
         display: block;
@@ -35,6 +41,7 @@
     &__types {
         display: flex;
         padding: 3px;
+        list-style-type: none;
     }
 
     &__type {
@@ -61,6 +68,8 @@
 
     &__size {
         display: flex;
+        list-style-type: none;
+        padding: 0 0 3px 0;
     }
 
     &__footer {

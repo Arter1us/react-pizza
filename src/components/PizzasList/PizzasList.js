@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { createSelector } from '@reduxjs/toolkit';
 
 import { fetchPizzas } from "./PizzasSlice";
+import { addItem } from "../CartList/CartListSlice";
 import PizzasListItem from "../PizzasListItem";
 import PizzaListSkeleton from './PizzaListSkeleton';
 
@@ -17,12 +18,21 @@ export default function PizzasList() {
 
     const pizzas = useSelector(pizzasSelector);
     const pizzasLoadingStatus = useSelector(state => state.pizzas.pizzasLoadingStatus);
+    const activeFilter = useSelector(state => state.filters.activeFilter);
     const dispatch = useDispatch();
+
+    const category = activeFilter !== 'all' ? `category=${activeFilter}` : '';
+    // const search = searchValue ? `search=${searchValue}` : '';
 
     useEffect(() => {
         dispatch(fetchPizzas());
         //eslint-disable-next-line        
     }, [])
+
+    useEffect(() => {
+        dispatch(fetchPizzas(category));
+        //eslint-disable-next-line        
+    }, [activeFilter])
 
     const renderPizzasList = (arr) => {
 
@@ -36,9 +46,13 @@ export default function PizzasList() {
             )
         }
 
-        return arr.map(({ id, ...props }) => {
+        return arr.map((item) => {
+            const { id, ...props } = item;
             return (
-                <PizzasListItem key={id} {...props} />
+                <PizzasListItem
+                    key={id}
+                    handleClick={() => dispatch(addItem(item))}
+                    {...props} />
             )
         })
     };

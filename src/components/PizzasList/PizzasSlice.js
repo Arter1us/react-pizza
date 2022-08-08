@@ -8,11 +8,13 @@ const initialState = {
 
 export const fetchPizzas = createAsyncThunk(
     'pizzas/fetchPizzas',
-    async () => {
+    async (params) => {
         const { request } = useHttp();
-        return await request("https://62d412595112e98e484a1a40.mockapi.io/pizzas")
+        return await request(`https://62d412595112e98e484a1a40.mockapi.io/pizzas?${params}`);
     }
 );
+
+// ?category=${initialState.activeCategory}
 
 const pizzasSlice = createSlice({
     name: 'pizzas',

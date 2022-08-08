@@ -6,13 +6,13 @@ import reactPizza from '../../resources/img/image1.svg';
 export default function Header() {
     return (
         <header className="header">
-            <div className="header__logo">
+            <Link to="/" className="header__logo">
                 <img src={reactPizza} alt="react-pizza" />
                 <div className="header__text">
                     <h1 className="header__title">react pizza</h1>
                     <p className="header__descr">самая вкусная пицца во вселенной</p>
                 </div>
-            </div>
+            </Link>
             <div className="header__cart">
                 <Link to="/cart" className="header__button header__button_cart">
                     <span className="header__price">520 ₽</span>
