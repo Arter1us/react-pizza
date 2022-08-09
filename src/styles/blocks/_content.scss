@@ -9,6 +9,50 @@
     }
 }
 
+.pagination {
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-top: 40px;
+
+    .selected {
+
+        a {
+            background-color: #FE5F1E;
+            color: #FFF;
+        }
+    }
+
+    li {
+        display: inline-block;
+        color: #FE5F1E;
+
+        &:hover {
+            color: #FFF;
+            border-radius: 30px;
+        }
+
+        a {
+            text-align: center;
+            width: 45px;
+            line-height: 42px;
+            height: 45px;
+            border: 1px solid #FE5F1E;
+            border-radius: 30px;
+            margin-right: 10px;
+            cursor: pointer;
+            display: inline-block;
+            color: #FE5F1E;
+
+            &:hover {
+                background-color: #FE5F1E;
+                color: #FFF;
+                border-radius: 30px;
+            }
+        }
+
+    }
+}
+
 .pizza-block {
     display: flex;
     justify-content: center;

@@ -1,28 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
 import { openSortChanged, sortStatusChanged } from "./SortSlice";
 
-export default function Sort() {
+const Sort = () => {
 
     const openSortPopup = useSelector(state => state.sort.openSortPopup);
     const sortStatus = useSelector(state => state.sort.sortStatus);
     const dispatch = useDispatch();
 
-    //const sortName = ['популярности', 'цене', 'алфавиту'];
-
-    //const [selectSort, setSelectSort] = useState(0);
-    //const [openSort, setOpenSort] = useState(false);
-
-    // const selectSortName = (i) => {
-    //     setSelectSort(i);
-    //     setOpenSort(false);
-    // };
-
     const selectSortName = (prop) => {
         dispatch(openSortChanged(false));
         dispatch(sortStatusChanged(prop))
-    }
-
-    //className={selectSort === i ? 'active' : ''}
+    };
 
     const list = [
         { name: 'популярности', sortProperty: 'rating' },
@@ -33,7 +21,12 @@ export default function Sort() {
     return (
         <div className="sort">
             <div className="sort__label">
-                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                    width="10"
+                    height="6"
+                    viewBox="0 0 10 6"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M10 5C10 5.16927 9.93815 5.31576 9.81445 5.43945C9.69075
                          5.56315 9.54427 5.625 9.375 5.625H0.625C0.455729 5.625
@@ -45,7 +38,8 @@ export default function Sort() {
                         fill="#2C2C2C" />
                 </svg>
                 <b>Сортировка по: </b>
-                <span onClick={() => dispatch(openSortChanged(!openSortPopup))}>{sortStatus.name}</span>
+                <span
+                    onClick={() => dispatch(openSortChanged(!openSortPopup))}>{sortStatus.name}</span>
             </div>
             {openSortPopup ? <div className="sort__popup">
                 <ul>
@@ -62,4 +56,6 @@ export default function Sort() {
             </div> : null}
         </div>
     )
-}
+};
+
+export default Sort;

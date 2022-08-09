@@ -3,26 +3,42 @@ import { useSelector, useDispatch } from "react-redux";
 import { createSelector } from '@reduxjs/toolkit';
 
 import { fetchPizzas } from "./PizzasSlice";
-import { addItem } from "../CartList/CartListSlice";
 import PizzasListItem from "../PizzasListItem";
 import PizzaListSkeleton from './PizzaListSkeleton';
+import Pagination from "../Pagination/Pagination";
 
 export default function PizzasList() {
 
-    const pizzasSelector = createSelector(
-        (state) => state.pizzas.pizzas,
-        (pizzas) => {
-            return pizzas;
+    // const pizzasSelector = createSelector(
+    //     (state) => state.pizzas.pizzas,
+    //     (pizzas) => {
+    //         return pizzas;
+    //     }
+    // );
+
+    const activeFilterSelector = createSelector(
+        (state) => state.filters.activeFilter,
+        (activeFilter) => {
+            return activeFilter;
         }
     );
 
-    const pizzas = useSelector(pizzasSelector);
-    const pizzasLoadingStatus = useSelector(state => state.pizzas.pizzasLoadingStatus);
-    const activeFilter = useSelector(state => state.filters.activeFilter);
+    //const pizzas = useSelector(pizzasSelector);
+    const { pizzas, pizzasLoadingStatus, currentPage } = useSelector(state => state.pizzas);
+    const activeFilter = useSelector(activeFilterSelector);
+    const sortStatus = useSelector(state => state.sort.sortStatus.sortProperty);
+    const searchValue = useSelector(state => state.search.searchValue);
     const dispatch = useDispatch();
 
-    const category = activeFilter !== 'all' ? `category=${activeFilter}` : '';
-    // const search = searchValue ? `search=${searchValue}` : '';
+    const category = activeFilter !== 'all' ? `&category=${activeFilter}` : '';
+    const logicParams = (category, sortStatus, currentPage) => {
+        const params = {
+            category,
+            sortStatus,
+            currentPage
+        };
+        return params;
+    };
 
     useEffect(() => {
         dispatch(fetchPizzas());
@@ -30,9 +46,9 @@ export default function PizzasList() {
     }, [])
 
     useEffect(() => {
-        dispatch(fetchPizzas(category));
+        dispatch(fetchPizzas(logicParams(category, sortStatus, currentPage)));
         //eslint-disable-next-line        
-    }, [activeFilter])
+    }, [activeFilter, sortStatus, searchValue, currentPage])
 
     const renderPizzasList = (arr) => {
 
@@ -46,22 +62,30 @@ export default function PizzasList() {
             )
         }
 
-        return arr.map((item) => {
-            const { id, ...props } = item;
-            return (
-                <PizzasListItem
-                    key={id}
-                    handleClick={() => dispatch(addItem(item))}
-                    {...props} />
-            )
+        return arr.filter((obj) => {
+            if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
+                return true;
+            }
+            return false;
         })
+            .map((item) => {
+                const { id, ...props } = item;
+                return (
+                    <PizzasListItem
+                        key={id}
+                        {...props} />
+                )
+            })
     };
 
     const elements = renderPizzasList(pizzas);
 
     return (
-        <ul className="content__grid">
-            {elements}
-        </ul>
+        <>
+            <ul className="content__grid">
+                {elements}
+            </ul>
+            <Pagination />
+        </>
     )
 }

@@ -11,7 +11,7 @@ export const fetchFilters = createAsyncThunk(
     'filters/fetchFilters',
     async () => {
         const { request } = useHttp();
-        return await request(`https://62d412595112e98e484a1a40.mockapi.io/filters`)
+        return await request(`https://62d412595112e98e484a1a40.mockapi.io/filters`);
     }
 );
 
@@ -20,8 +20,8 @@ const filtersSlice = createSlice({
     initialState,
     reducers: {
         filtersChanged: (state, action) => {
-            state.activeFilter = action.payload
-            console.log(state.activeFilter);
+            state.activeFilter = action.payload;
+            //console.log(state.activeFilter);
         }
     },
     extraReducers: (builder) => {

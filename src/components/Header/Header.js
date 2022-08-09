@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 import reactPizza from '../../resources/img/image1.svg';
+import Search from '../Search';
 
 export default function Header() {
     return (
@@ -13,6 +14,7 @@ export default function Header() {
                     <p className="header__descr">самая вкусная пицца во вселенной</p>
                 </div>
             </Link>
+            <Search />
             <div className="header__cart">
                 <Link to="/cart" className="header__button header__button_cart">
                     <span className="header__price">520 ₽</span>

@@ -48,8 +48,10 @@
         }
 
         span {
+            display: inline-block;
             color: #FE5F1E;
             cursor: pointer;
+            min-width: 105px;
         }
     }
 
