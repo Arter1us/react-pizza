@@ -25,6 +25,7 @@
     li {
         display: inline-block;
         color: #FE5F1E;
+        margin-right: 10px;
 
         &:hover {
             color: #FFF;
@@ -38,7 +39,6 @@
             height: 45px;
             border: 1px solid #FE5F1E;
             border-radius: 30px;
-            margin-right: 10px;
             cursor: pointer;
             display: inline-block;
             color: #FE5F1E;
@@ -50,6 +50,16 @@
             }
         }
 
+    }
+
+    .disabled {
+        color: #FFF;
+        border-radius: 30px;
+        background-color: #FE5F1E;
+
+        a {
+            color: #FFF;
+        }
     }
 }
 

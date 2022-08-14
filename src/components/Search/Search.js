@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import debounce from 'lodash.debounce';
 import { searchChanged } from "./SearchSlice";
 
 const Search = () => {

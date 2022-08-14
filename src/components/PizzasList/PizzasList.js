@@ -1,11 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createSelector } from '@reduxjs/toolkit';
+import qs from 'qs';
 
-import { fetchPizzas } from "./PizzasSlice";
+import { fetchPizzas, currentPageChanged } from "./PizzasSlice";
+import { sortStatusChanged } from "../Sort/SortSlice";
+import { filtersChanged } from "../Categories/CategoriesSlice";
 import PizzasListItem from "../PizzasListItem";
 import PizzaListSkeleton from './PizzaListSkeleton';
 import Pagination from "../Pagination/Pagination";
+import { list } from "../Sort/Sort";
 
 export default function PizzasList() {
 
@@ -29,8 +34,13 @@ export default function PizzasList() {
     const sortStatus = useSelector(state => state.sort.sortStatus.sortProperty);
     const searchValue = useSelector(state => state.search.searchValue);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const isSearch = useRef(false);
+    const isMounted = useRef(false);
 
     const category = activeFilter !== 'all' ? `&category=${activeFilter}` : '';
+
     const logicParams = (category, sortStatus, currentPage) => {
         const params = {
             category,
@@ -42,11 +52,47 @@ export default function PizzasList() {
 
     useEffect(() => {
         dispatch(fetchPizzas());
-        //eslint-disable-next-line        
+        console.log('1');
+        //eslint-disable-next-line
     }, [])
 
     useEffect(() => {
-        dispatch(fetchPizzas(logicParams(category, sortStatus, currentPage)));
+        if (window.location.search) {
+            const params = qs.parse(window.location.search.substring(1));
+
+            const sort = list.find(obj => obj.sortProperty === params.sortStatus);
+
+            dispatch(currentPageChanged(params.currentPage));
+            dispatch(sortStatusChanged(sort));
+            dispatch(filtersChanged(params.activeFilter));
+
+            isSearch.current = true;
+        }
+        console.log('2');
+        //eslint-disable-next-line
+    }, [])
+
+    useEffect(() => {
+        if (!isSearch.current) {
+            dispatch(fetchPizzas(logicParams(category, sortStatus, currentPage)));
+        }
+        isSearch.current = false;
+        console.log('3');
+        //eslint-disable-next-line
+    }, [activeFilter, sortStatus, searchValue, currentPage])
+
+    useEffect(() => {
+        if (isMounted.current) {
+            const queryString = qs.stringify({
+                currentPage,
+                sortStatus,
+                activeFilter
+            });
+
+            navigate(`?${queryString}`)
+        }
+        isMounted.current = true;
+        console.log('4');
         //eslint-disable-next-line        
     }, [activeFilter, sortStatus, searchValue, currentPage])
 

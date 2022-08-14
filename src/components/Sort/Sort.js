@@ -1,25 +1,40 @@
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { openSortChanged, sortStatusChanged } from "./SortSlice";
+
+export const list = [
+    { name: 'популярности', sortProperty: 'rating' },
+    { name: 'цене', sortProperty: 'price' },
+    { name: 'алфавиту', sortProperty: 'title' }
+];
 
 const Sort = () => {
 
     const openSortPopup = useSelector(state => state.sort.openSortPopup);
     const sortStatus = useSelector(state => state.sort.sortStatus);
     const dispatch = useDispatch();
+    const sortRef = useRef();
 
     const selectSortName = (prop) => {
         dispatch(openSortChanged(false));
         dispatch(sortStatusChanged(prop))
     };
 
-    const list = [
-        { name: 'популярности', sortProperty: 'rating' },
-        { name: 'цене', sortProperty: 'price' },
-        { name: 'алфавиту', sortProperty: 'title' }
-    ];
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (!event.path.includes(sortRef.current)) {
+                dispatch(openSortChanged(false));
+            }
+        }
+        document.body.addEventListener('click', handleClickOutside)
+        return () => {
+            document.body.removeEventListener('click', handleClickOutside);
+        }
+        //eslint-disable-next-line
+    }, [])
 
     return (
-        <div className="sort">
+        <div ref={sortRef} className="sort">
             <div className="sort__label">
                 <svg
                     width="10"

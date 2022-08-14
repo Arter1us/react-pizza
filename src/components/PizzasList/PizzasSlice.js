@@ -22,7 +22,6 @@ const pizzasSlice = createSlice({
     reducers: {
         currentPageChanged: (state, action) => {
             state.currentPage = action.payload;
-            console.log(state.currentPage);
         }
     },
     extraReducers: (builder) => {
