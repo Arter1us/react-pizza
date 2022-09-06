@@ -52,7 +52,7 @@ export default function PizzasList() {
 
     useEffect(() => {
         dispatch(fetchPizzas());
-        console.log('1');
+        //console.log('1');
         //eslint-disable-next-line
     }, [])
 
@@ -68,7 +68,7 @@ export default function PizzasList() {
 
             isSearch.current = true;
         }
-        console.log('2');
+        //console.log('2');
         //eslint-disable-next-line
     }, [])
 
@@ -77,7 +77,7 @@ export default function PizzasList() {
             dispatch(fetchPizzas(logicParams(category, sortStatus, currentPage)));
         }
         isSearch.current = false;
-        console.log('3');
+        //console.log('3');
         //eslint-disable-next-line
     }, [activeFilter, sortStatus, searchValue, currentPage])
 
@@ -88,24 +88,21 @@ export default function PizzasList() {
                 sortStatus,
                 activeFilter
             });
-
             navigate(`?${queryString}`)
         }
         isMounted.current = true;
-        console.log('4');
+        //console.log('4');
         //eslint-disable-next-line        
     }, [activeFilter, sortStatus, searchValue, currentPage])
 
     const renderPizzasList = (arr) => {
 
         if (pizzasLoadingStatus === "loading") {
-            return [...new Array(8)].map((_, i) => <PizzaListSkeleton key={i} />)
+            return [...new Array(4)].map((_, i) => <PizzaListSkeleton key={i} />)
         } else if (pizzasLoadingStatus === "error") {
             return <h5 className="text-center mt-5">Ошибка загрузки</h5>
         } else if (arr.length === 0) {
-            return (
-                <h5>Пицц пока нет</h5>
-            )
+            return <h5>Пицц пока нет</h5>
         }
 
         return arr.filter((obj) => {
@@ -115,11 +112,10 @@ export default function PizzasList() {
             return false;
         })
             .map((item) => {
-                const { id, ...props } = item;
                 return (
                     <PizzasListItem
-                        key={id}
-                        {...props} />
+                        key={item.id}
+                        {...item} />
                 )
             })
     };
