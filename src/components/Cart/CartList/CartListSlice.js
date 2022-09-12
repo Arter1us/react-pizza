@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-//import isEqual from "lodash.isequal";
 
 const initialState = {
     totalPrice: 0,
     items: []
-}
+};
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -16,6 +15,27 @@ const cartSlice = createSlice({
             state.totalPrice = state.items.reduce((sum, obj) => {
                 return obj.price + sum;
             }, 0);
+        },
+        decrementItem: (state, action) => {
+            console.log(state.items);
+            state.items.splice(action.payload, 1);
+
+            state.totalPrice = state.items.reduce((sum, obj) => {
+                return obj.price + sum;
+            }, 0);
+        },
+        removeItem: (state, action) => {
+            state.items = state.items.filter((item) => {
+                return (item.id !== action.payload.id && item.type !== action.payload.type && item.size !== action.payload.size)
+            });
+
+            state.totalPrice = state.items.reduce((sum, obj) => {
+                return obj.price + sum;
+            }, 0);
+        },
+        clearCart: (state) => {
+            state.items = [];
+            state.totalPrice = 0;
         }
     }
 });
@@ -23,20 +43,4 @@ const cartSlice = createSlice({
 const { actions, reducer } = cartSlice;
 
 export default reducer;
-export const { addItem } = actions;
-
-// {
-        //     "id": "1",
-        //     "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/2ffc31bb-132c-4c99-b894-53f7107a1441.jpg",
-        //     "title": "Сырная",
-        //     "types": [
-        //         0
-        //     ],
-        //     "sizes": [
-        //         26,
-        //         40
-        //     ],
-        //     "price": 245,
-        //     "category": 3,
-        //     "rating": 6
-        // }
+export const { addItem, decrementItem, removeItem, clearCart } = actions;

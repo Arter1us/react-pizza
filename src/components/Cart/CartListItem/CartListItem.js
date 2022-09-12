@@ -1,9 +1,30 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addItem, decrementItem, removeItem } from "../CartList/CartListSlice";
 
 const CartListItem = ({ id, imageUrl, title, type, size, price }) => {
 
+    const dispatch = useDispatch();
+
     const items = useSelector(state => state.cart.items);
-    const filteredItems = items.filter(item => item.id === id);
+    const filteredItems = items.filter(item => (item.id === id && item.type === type && item.size === size));
+
+    const onClickAdd = () => {
+        const item = {
+            id,
+            title,
+            price,
+            imageUrl,
+            type,
+            size
+        };
+        dispatch(addItem(item));
+    };
+
+    const onClickRemove = (id, type, size) => {
+        const idx = items.findIndex(item => item.id === id && item.type === type && item.size === size);
+
+        dispatch(decrementItem(idx));
+    };
 
     return (
         <li className="cart-list__item">
@@ -15,7 +36,10 @@ const CartListItem = ({ id, imageUrl, title, type, size, price }) => {
                 </div>
             </div>
             <div className="cart-list__count">
-                <svg className="cart-list__dec" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                <svg
+                    className="cart-list__dec"
+                    onClick={() => onClickRemove(id, type, size)}
+                    width="32" height="32" viewBox="0 0 32 32" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <circle cx="16" cy="16" r="15" fill="white" stroke="#FE5F1E" strokeWidth="2" />
                     <path
@@ -25,7 +49,10 @@ const CartListItem = ({ id, imageUrl, title, type, size, price }) => {
                         fill="#FE5F1E" />
                 </svg>
                 <p className="cart-list__number">{filteredItems.length}</p>
-                <svg className="cart-list__inc" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                <svg
+                    className="cart-list__inc"
+                    onClick={() => onClickAdd()}
+                    width="32" height="32" viewBox="0 0 32 32" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <circle cx="16" cy="16" r="15" fill="white" stroke="#FE5F1E" strokeWidth="2" />
                     <path
@@ -39,7 +66,10 @@ const CartListItem = ({ id, imageUrl, title, type, size, price }) => {
                 </svg>
             </div>
             <div className="cart-list__price">{price} ₽</div>
-            <svg className="cart-list__cancel" width="32" height="32" viewBox="0 0 32 32" fill="none"
+            <svg
+                className="cart-list__cancel"
+                onClick={() => dispatch(removeItem({ id, type, size }))}
+                width="32" height="32" viewBox="0 0 32 32" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <circle cx="16" cy="16" r="15" fill="white" stroke="#D7D7D7" strokeWidth="2" />
                 <path

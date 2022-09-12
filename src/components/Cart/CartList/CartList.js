@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import CartListItem from '../CartListItem';
 
-export default function CartList() {
+const CartList = () => {
 
     const items = useSelector(state => state.cart.items);
 
@@ -47,8 +47,6 @@ export default function CartList() {
 
             } // Конец цикла
         });
-        console.log(duplicatesIndices, "duplicatesIndices");
-        console.log(result, "result");
         return result;
     };
 
@@ -72,4 +70,6 @@ export default function CartList() {
             </ul>
         </div>
     )
-}
+};
+
+export default CartList;
