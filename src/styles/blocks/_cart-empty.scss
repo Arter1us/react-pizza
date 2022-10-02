@@ -29,9 +29,14 @@
         text-decoration: none;
         border-radius: 30px;
         margin: 70px auto 0;
-    }
 
-    &__btn:hover {
-        color: #fff;
+        &:hover {
+            color: #fff;
+        }
+
+        &:active {
+            transform: translateY(2px);
+            transition: all 0.2s;
+        }
     }
 }

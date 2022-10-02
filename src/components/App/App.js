@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { MainPage, CartPage, EmptyCartPage } from '../Pages';
+import { MainPage, CartPage } from '../Pages';
 import Header from '../Header';
 
-function App() {
+const App = () => {
     return (
         <Router>
             <div className="wrapper">
@@ -12,12 +12,11 @@ function App() {
                     <Routes>
                         <Route path="/" element={<MainPage />} />
                         <Route path="/cart" element={<CartPage />} />
-                        <Route path="/empty-cart" element={<EmptyCartPage />} />
                     </Routes>
                 </div>
             </div>
         </Router>
-    );
-}
+    )
+};
 
 export default App;

@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 import { addItem } from "../Cart/CartList/CartListSlice";
 
-export default function PizzasListItem({ id, imageUrl, title, types, sizes, price }) {
+const PizzasListItem = ({ id, imageUrl, title, types, sizes, price }) => {
 
     const typeNames = ['тонкое', 'традиционное'];
 
@@ -77,4 +77,6 @@ export default function PizzasListItem({ id, imageUrl, title, types, sizes, pric
             </li>
         </>
     )
-}
+};
+
+export default PizzasListItem;

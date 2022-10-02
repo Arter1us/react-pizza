@@ -8,18 +8,11 @@ import { fetchPizzas, currentPageChanged } from "./PizzasSlice";
 import { sortStatusChanged } from "../Sort/SortSlice";
 import { filtersChanged } from "../Categories/CategoriesSlice";
 import PizzasListItem from "../PizzasListItem";
-import PizzaListSkeleton from './PizzaListSkeleton';
+import PizzasListSkeleton from './PizzasListSkeleton';
 import Pagination from "../Pagination/Pagination";
 import { list } from "../Sort/Sort";
 
-export default function PizzasList() {
-
-    // const pizzasSelector = createSelector(
-    //     (state) => state.pizzas.pizzas,
-    //     (pizzas) => {
-    //         return pizzas;
-    //     }
-    // );
+const PizzasList = () => {
 
     const activeFilterSelector = createSelector(
         (state) => state.filters.activeFilter,
@@ -28,7 +21,6 @@ export default function PizzasList() {
         }
     );
 
-    //const pizzas = useSelector(pizzasSelector);
     const { pizzas, pizzasLoadingStatus, currentPage } = useSelector(state => state.pizzas);
     const activeFilter = useSelector(activeFilterSelector);
     const sortStatus = useSelector(state => state.sort.sortStatus.sortProperty);
@@ -50,11 +42,11 @@ export default function PizzasList() {
         return params;
     };
 
-    useEffect(() => {
-        dispatch(fetchPizzas());
-        //console.log('1');
-        //eslint-disable-next-line
-    }, [])
+    // useEffect(() => {
+    //     dispatch(fetchPizzas());
+    //     //console.log('1');
+    //     //eslint-disable-next-line
+    // }, [])
 
     useEffect(() => {
         if (window.location.search) {
@@ -98,7 +90,7 @@ export default function PizzasList() {
     const renderPizzasList = (arr) => {
 
         if (pizzasLoadingStatus === "loading") {
-            return [...new Array(4)].map((_, i) => <PizzaListSkeleton key={i} />)
+            return [...new Array(4)].map((_, i) => <PizzasListSkeleton key={i} />)
         } else if (pizzasLoadingStatus === "error") {
             return <h5 className="text-center mt-5">Ошибка загрузки</h5>
         } else if (arr.length === 0) {
@@ -130,4 +122,6 @@ export default function PizzasList() {
             <Pagination />
         </>
     )
-}
+};
+
+export default PizzasList;

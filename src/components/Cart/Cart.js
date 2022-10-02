@@ -1,11 +1,9 @@
-import React from 'react'
-
 import CartHeader from './CartHeader';
-import CartList from './CartList';
+import CartList from './CartList/CartList';
 import CartInfo from './CartInfo';
 import CartBtn from './CartBtn';
 
-export default function Cart() {
+const Cart = () => {
     return (
         <section className="cart">
             <CartHeader />
@@ -14,4 +12,6 @@ export default function Cart() {
             <CartBtn />
         </section>
     )
-}
+};
+
+export default Cart;

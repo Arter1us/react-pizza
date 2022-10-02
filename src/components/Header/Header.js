@@ -1,11 +1,10 @@
-import React from 'react'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import reactPizza from '../../resources/img/image1.svg';
 import Search from '../Search';
 
-export default function Header() {
+const Header = () => {
 
     const { totalPrice, items } = useSelector(state => state.cart);
 
@@ -54,4 +53,6 @@ export default function Header() {
             </div>
         </header>
     )
-}
+};
+
+export default Header;

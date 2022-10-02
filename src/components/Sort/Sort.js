@@ -22,7 +22,7 @@ const Sort = () => {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (!event.path.includes(sortRef.current)) {
+            if (!event.composedPath().includes(sortRef.current)) {
                 dispatch(openSortChanged(false));
             }
         }

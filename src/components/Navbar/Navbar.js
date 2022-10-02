@@ -1,7 +1,7 @@
 import Categories from "../Categories";
 import Sort from "../Sort";
 
-export default function Navbar() {
+const Navbar = () => {
 
     return (
         <nav className="navbar">
@@ -9,4 +9,6 @@ export default function Navbar() {
             <Sort />
         </nav>
     )
-}
+};
+
+export default Navbar;

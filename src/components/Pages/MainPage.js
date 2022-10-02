@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Navbar from "../Navbar"
 import PizzasList from '../PizzasList';
 
-export default function MainPage() {
+const MainPage = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -14,4 +14,6 @@ export default function MainPage() {
             <PizzasList />
         </>
     )
-}
+};
+
+export default MainPage;

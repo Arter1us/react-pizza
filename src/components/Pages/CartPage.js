@@ -1,7 +1,17 @@
-import Cart from '../Cart';
+import { useSelector } from "react-redux";
 
-export default function MainPage() {
-    return (
-        <Cart />
-    )
-}
+import Cart from '../Cart/Cart';
+import CartEmpty from '../Cart/CartEmpty';
+
+const MainPage = () => {
+
+    const totalPrice = useSelector(state => state.cart.totalPrice);
+
+    if (!totalPrice) {
+        return <CartEmpty />
+    } else {
+        return <Cart />
+    }
+};
+
+export default MainPage;

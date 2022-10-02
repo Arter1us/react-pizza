@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { filtersChanged, fetchFilters } from "./CategoriesSlice";
 import SkeletonCategories from './SkeletonCategories';
 
-export default function Categories() {
+const Categories = () => {
 
     const filtersSelector = createSelector(
         (state) => state.filters.filters,
@@ -18,9 +18,7 @@ export default function Categories() {
     const dispatch = useDispatch();
 
     const filters = useSelector(filtersSelector);
-    const filtersLoadingStatus = useSelector(state => state.filters.filtersLoadingStatus);
-
-    const activeFilter = useSelector(state => state.filters.activeFilter);
+    const { filtersLoadingStatus, activeFilter } = useSelector(state => state.filters);
 
     useEffect(() => {
         dispatch(fetchFilters());
@@ -53,7 +51,8 @@ export default function Categories() {
                 <li
                     key={name}
                     className={btnClass}
-                    onClick={() => selectFilterId(name)}>{label}</li>
+                    onClick={() => selectFilterId(name)}
+                >{label}</li>
             )
         })
     };
@@ -65,4 +64,6 @@ export default function Categories() {
             {elements}
         </ul>
     )
-}
+};
+
+export default Categories;

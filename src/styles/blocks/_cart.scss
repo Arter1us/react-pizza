@@ -86,6 +86,11 @@
             color: #FFF;
             transition: all 0.2s;
         }
+
+        &:active {
+            transform: translateY(3px);
+            transition: all 0.2s;
+        }
     }
 
     &__btn-back:hover {
@@ -113,10 +118,15 @@
         border-radius: 30px;
         line-height: 50px;
         text-decoration: none;
-    }
 
-    &__btn-pay:hover {
-        color: #FFF;
+        &:hover {
+            color: #FFF;
+        }
+
+        &:active {
+            transform: translateY(3px);
+            transition: all 0.2s;
+        }
     }
 }
 
@@ -181,10 +191,20 @@
 
     &__inc {
         cursor: pointer;
+
+        :active {
+            transform: translateY(1px);
+            transition: all 0.2s;
+        }
     }
 
     &__dec {
         cursor: pointer;
+
+        :active {
+            transform: translateY(1px);
+            transition: all 0.2s;
+        }
     }
 
     &__cancel {
