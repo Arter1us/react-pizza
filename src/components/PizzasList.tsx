@@ -1,10 +1,13 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { createSelector } from "@reduxjs/toolkit";
 import qs from "qs";
 
-import { fetchPizzas, currentPageChanged, PizzasItem } from "../redux/PizzasSlice";
+import {
+    fetchPizzas,
+    currentPageChanged,
+    PizzasItem,
+} from "../redux/PizzasSlice";
 import { sortStatusChanged } from "../redux/SortSlice";
 import { filtersChanged } from "../redux/CategoriesSlice";
 import PizzasListItem from "./PizzasListItem";
@@ -14,21 +17,18 @@ import { list } from "./Sort";
 import { RootState, useAppDispatch } from "../store";
 
 const PizzasList = () => {
-    const activeFilterSelector = createSelector(
-        (state: RootState) => state.filters.activeFilter,
-        (activeFilter) => {
-            return activeFilter;
-        }
-    );
-
     const { pizzas, pizzasLoadingStatus, currentPage } = useSelector(
         (state: RootState) => state.pizzas
     );
-    const activeFilter = useSelector(activeFilterSelector);
+    const activeFilter = useSelector(
+        (state: RootState) => state.filters.activeFilter
+    );
     const sortStatus = useSelector(
         (state: RootState) => state.sort.sortStatus.sortProperty
     );
-    const searchValue = useSelector((state: RootState) => state.search.searchValue);
+    const searchValue = useSelector(
+        (state: RootState) => state.search.searchValue
+    );
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -37,7 +37,11 @@ const PizzasList = () => {
 
     const category = activeFilter !== "all" ? `&category=${activeFilter}` : "";
 
-    const logicParams = (category: string, sortStatus: string, currentPage: number) => {
+    const logicParams = (
+        category: string,
+        sortStatus: string,
+        currentPage: number
+    ) => {
         const params = {
             category,
             sortStatus,
@@ -46,11 +50,10 @@ const PizzasList = () => {
         return params;
     };
 
-    // useEffect(() => {
-    //     dispatch(fetchPizzas());
-    //     //console.log('1');
-    //     //eslint-disable-next-line
-    // }, [])
+    useEffect(() => {
+        dispatch(fetchPizzas(logicParams(category, sortStatus, currentPage)));
+        //eslint-disable-next-line
+    }, []);
 
     useEffect(() => {
         if (window.location.search) {
@@ -60,13 +63,12 @@ const PizzasList = () => {
                 (obj) => obj.sortProperty === params.sortStatus
             );
 
-            dispatch(currentPageChanged(params.currentPage));
-            dispatch(sortStatusChanged(sort));
-            dispatch(filtersChanged(params.activeFilter));
+            dispatch(currentPageChanged(Number(params.currentPage)));
+            dispatch(sortStatusChanged(sort ? sort : list[0]));
+            dispatch(filtersChanged(String(params.activeFilter)));
 
             isSearch.current = true;
         }
-        //console.log('2');
         //eslint-disable-next-line
     }, []);
 
@@ -77,7 +79,6 @@ const PizzasList = () => {
             );
         }
         isSearch.current = false;
-        //console.log('3');
         //eslint-disable-next-line
     }, [activeFilter, sortStatus, searchValue, currentPage]);
 
@@ -91,7 +92,6 @@ const PizzasList = () => {
             navigate(`?${queryString}`);
         }
         isMounted.current = true;
-        //console.log('4');
         //eslint-disable-next-line
     }, [activeFilter, sortStatus, searchValue, currentPage]);
 
@@ -106,7 +106,8 @@ const PizzasList = () => {
             return <h5>Пицц пока нет</h5>;
         }
 
-        return arr.filter((obj) => {
+        return arr
+            .filter((obj) => {
                 if (
                     obj.title.toLowerCase().includes(searchValue.toLowerCase())
                 ) {

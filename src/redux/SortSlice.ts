@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type SortStatus = {
+export type SortStatus = {
     name: string;
-    sortProperty: 'rating' | 'price' | 'title';
+    sortProperty: "rating" | "price" | "title";
 }
 
 interface SortSliceState {
@@ -22,10 +22,10 @@ const sortSlice = createSlice({
     name: 'sort',
     initialState,
     reducers: {
-        openSortChanged: (state, action) => {
+        openSortChanged: (state, action: PayloadAction<boolean>) => {
             state.openSortPopup = action.payload;
         },
-        sortStatusChanged: (state, action) => {
+        sortStatusChanged: (state, action: PayloadAction<SortStatus>) => {
             state.sortStatus = action.payload;
         }
     }

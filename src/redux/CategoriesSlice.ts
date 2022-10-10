@@ -1,14 +1,14 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { useHttp } from "../hooks/http.hook";
 
 export type FiltersItem = {
     name: string;
     label: string;
-}
+};
 
 interface CategoriesSliceState {
     filters: FiltersItem[];
-    filtersLoadingStatus: string;
+    filtersLoadingStatus: "loading" | "idle" | "error";
     activeFilter: string;
 }
 
@@ -32,7 +32,7 @@ const filtersSlice = createSlice({
     name: "filters",
     initialState,
     reducers: {
-        filtersChanged: (state, action) => {
+        filtersChanged: (state, action: PayloadAction<string>) => {
             state.activeFilter = action.payload;
         },
     },
@@ -41,10 +41,13 @@ const filtersSlice = createSlice({
             .addCase(fetchFilters.pending, (state) => {
                 state.filtersLoadingStatus = "loading";
             })
-            .addCase(fetchFilters.fulfilled, (state, action) => {
-                state.filtersLoadingStatus = "idle";
-                state.filters = action.payload;
-            })
+            .addCase(
+                fetchFilters.fulfilled,
+                (state, action: PayloadAction<[]>) => {
+                    state.filtersLoadingStatus = "idle";
+                    state.filters = action.payload;
+                }
+            )
             .addCase(fetchFilters.rejected, (state) => {
                 state.filtersLoadingStatus = "error";
             })

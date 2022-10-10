@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Search from "./Search";
 import { RootState } from "../store";
@@ -8,6 +8,7 @@ import cartButton from "../resources/img/cart_button.svg";
 
 const Header = () => {
     const { totalPrice, items } = useSelector((state: RootState) => state.cart);
+    const location = useLocation();
 
     return (
         <header className="header">
@@ -20,20 +21,25 @@ const Header = () => {
                     </p>
                 </div>
             </Link>
-            <Search />
+            {location.pathname !== "/cart" && <Search />}
             <div className="header__cart">
-                <Link to="/cart" className="header__button header__button_cart">
-                    <span className="header__price">{totalPrice} ₽</span>
-                    <div className="header__delimiter"></div>
-                    <div className="header__count">
-                        <img
-                            className="header__icon"
-                            src={cartButton}
-                            alt="cartButton"
-                        />
-                        <span>{items.length}</span>
-                    </div>
-                </Link>
+                {location.pathname !== "/cart" && (
+                    <Link
+                        to="/cart"
+                        className="header__button header__button_cart"
+                    >
+                        <span className="header__price">{totalPrice} ₽</span>
+                        <div className="header__delimiter"></div>
+                        <div className="header__count">
+                            <img
+                                className="header__icon"
+                                src={cartButton}
+                                alt="cartButton"
+                            />
+                            <span>{items.length}</span>
+                        </div>
+                    </Link>
+                )}
             </div>
         </header>
     );

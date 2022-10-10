@@ -12,10 +12,16 @@ type PizzasListItemProps = {
     types: number[];
     sizes: number[];
     price: number;
-}
+};
 
-const PizzasListItem: React.FC<PizzasListItemProps> = ({ id, imageUrl, title, types, sizes, price }) => {
-
+const PizzasListItem: React.FC<PizzasListItemProps> = ({
+    id,
+    imageUrl,
+    title,
+    types,
+    sizes,
+    price,
+}) => {
     const typeNames = ["тонкое", "традиционное"];
 
     const [activeType, setActiveType] = useState<string | null>(null);
@@ -37,14 +43,18 @@ const PizzasListItem: React.FC<PizzasListItemProps> = ({ id, imageUrl, title, ty
                 size: activeSize,
             };
             dispatch(addItem(item));
-        } return;
+        }
+        return;
     };
 
     const countPizzaClass = classNames("pizza-block__count", {
         "pizza-block__count_active": filteredItems.length > 0,
     });
 
-    const setClass = (propName: string | number | null, state: string | number | null) => {
+    const setClass = (
+        propName: string | number | null,
+        state: string | number | null
+    ) => {
         const typeClass = classNames("pizza-block__type", {
             "pizza-block__type_active": propName === state,
         });

@@ -1,16 +1,11 @@
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { openSortChanged, sortStatusChanged } from "../redux/SortSlice";
+import { openSortChanged, SortStatus, sortStatusChanged } from "../redux/SortSlice";
 import { RootState } from "../store";
 
 import triangle from "../resources/img/triangle.svg";
 
-type SortListItem = {
-    name: string;
-    sortProperty: string;
-}
-
-export const list: SortListItem[] = [
+export const list: SortStatus[] = [
     { name: "популярности", sortProperty: "rating" },
     { name: "цене", sortProperty: "price" },
     { name: "алфавиту", sortProperty: "title" },
@@ -22,7 +17,7 @@ const Sort: React.FC = () => {
     const dispatch = useDispatch();
     const sortRef = useRef<HTMLDivElement>(null);
 
-    const selectSortName = (prop: SortListItem) => {
+    const selectSortName = (prop: SortStatus) => {
         dispatch(openSortChanged(false));
         dispatch(sortStatusChanged(prop));
     };

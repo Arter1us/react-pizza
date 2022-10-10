@@ -3,7 +3,11 @@ import { useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
 import classNames from "classnames";
 
-import { filtersChanged, fetchFilters, FiltersItem } from "../redux/CategoriesSlice";
+import {
+    filtersChanged,
+    fetchFilters,
+    FiltersItem,
+} from "../redux/CategoriesSlice";
 import CategoriesSkeleton from "./Skeletons/CategoriesSkeleton";
 import { RootState, useAppDispatch } from "../store";
 

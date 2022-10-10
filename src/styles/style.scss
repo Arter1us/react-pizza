@@ -1,8 +1,8 @@
-@import 'libs/bootstrap-reboot.min';
+@import "libs/bootstrap-reboot.min";
 
 body {
-    background-color: #FFDF8C;
-    font-family: 'Nunito';
+    background-color: #ffdf8c;
+    font-family: "Nunito";
 }
 
 a {
@@ -18,9 +18,9 @@ a {
     padding: 50px;
 }
 
-@import 'blocks/header';
-@import 'blocks/navbar';
-@import 'blocks/content';
-@import 'blocks/cart';
-@import 'blocks/cart-empty';
-@import 'blocks/media';
+@import "blocks/header";
+@import "blocks/navbar";
+@import "blocks/content";
+@import "blocks/cart";
+@import "blocks/cart-empty";
+@import "blocks/media";

@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { useHttp } from "../hooks/http.hook";
 
 export type PizzasItem = {
@@ -45,7 +45,7 @@ const pizzasSlice = createSlice({
     name: "pizzas",
     initialState,
     reducers: {
-        currentPageChanged: (state, action) => {
+        currentPageChanged: (state, action: PayloadAction<number>) => {
             state.currentPage = action.payload;
         },
     },
@@ -54,7 +54,7 @@ const pizzasSlice = createSlice({
             .addCase(fetchPizzas.pending, (state) => {
                 state.pizzasLoadingStatus = "loading";
             })
-            .addCase(fetchPizzas.fulfilled, (state, action) => {
+            .addCase(fetchPizzas.fulfilled, (state, action: PayloadAction<[]>) => {
                 state.pizzasLoadingStatus = "idle";
                 state.pizzas = action.payload;
             })

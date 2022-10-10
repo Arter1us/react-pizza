@@ -7,11 +7,11 @@ export type CartItem = {
     type: string;
     size: number;
     price: number;
-}
+};
 
 interface CartListSliceState {
     totalPrice: number;
-    items: CartItem[]
+    items: CartItem[];
 }
 
 const initialState: CartListSliceState = {
