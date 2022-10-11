@@ -6,10 +6,10 @@ import classNames from "classnames";
 import {
     filtersChanged,
     fetchFilters,
-    FiltersItem,
-} from "../redux/CategoriesSlice";
+} from "../redux/Categories/CategoriesSlice";
 import CategoriesSkeleton from "./Skeletons/CategoriesSkeleton";
 import { RootState, useAppDispatch } from "../store";
+import { FiltersItem } from "../redux/Categories/types";
 
 const Categories = () => {
     const filtersSelector = createSelector(

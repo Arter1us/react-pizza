@@ -1,28 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { useHttp } from "../hooks/http.hook";
-
-export type PizzasItem = {
-    id: string;
-    imageUrl: string;
-    title: string;
-    types: number[];
-    sizes: number[];
-    price: number;
-    category: string;
-    rating: number;
-}
-
-type FetchPizzasArgs = {
-    category: string;
-    sortStatus: string;
-    currentPage: number;
-}
-
-interface PizzaSliceState {
-    pizzas: PizzasItem[];
-    pizzasLoadingStatus: string;
-    currentPage: number;
-}
+import { useHttp } from "../../hooks/http.hook";
+import { FetchPizzasArgs, PizzasItem, PizzaSliceState } from "./types";
 
 const initialState: PizzaSliceState = {
     pizzas: [],
@@ -54,10 +32,13 @@ const pizzasSlice = createSlice({
             .addCase(fetchPizzas.pending, (state) => {
                 state.pizzasLoadingStatus = "loading";
             })
-            .addCase(fetchPizzas.fulfilled, (state, action: PayloadAction<[]>) => {
-                state.pizzasLoadingStatus = "idle";
-                state.pizzas = action.payload;
-            })
+            .addCase(
+                fetchPizzas.fulfilled,
+                (state, action: PayloadAction<PizzasItem[]>) => {
+                    state.pizzasLoadingStatus = "idle";
+                    state.pizzas = action.payload;
+                }
+            )
             .addCase(fetchPizzas.rejected, (state) => {
                 state.pizzasLoadingStatus = "error";
             })

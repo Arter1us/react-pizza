@@ -1,16 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { useHttp } from "../hooks/http.hook";
-
-export type FiltersItem = {
-    name: string;
-    label: string;
-};
-
-interface CategoriesSliceState {
-    filters: FiltersItem[];
-    filtersLoadingStatus: "loading" | "idle" | "error";
-    activeFilter: string;
-}
+import { useHttp } from "../../hooks/http.hook";
+import { CategoriesSliceState } from "./types";
 
 const initialState: CategoriesSliceState = {
     filters: [],

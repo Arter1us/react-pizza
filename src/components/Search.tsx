@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 //import debounce from "lodash.debounce";
-import { searchChanged } from "../redux/SearchSlice";
+import { searchChanged } from "../redux/Search/SearchSlice";
 import { RootState } from "../store";
 
 import search from "../resources/img/search.svg";
@@ -10,7 +10,9 @@ import cancel from "../resources/img/cancel.svg";
 const Search = () => {
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const searchValue = useSelector((state: RootState) => state.search.searchValue);
+    const searchValue = useSelector(
+        (state: RootState) => state.search.searchValue
+    );
     const dispatch = useDispatch();
 
     const onClickClear = () => {

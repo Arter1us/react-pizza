@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import { CartItem } from "../../redux/Cart/types";
 
-import { CartItem } from "../../redux/CartListSlice";
 import { RootState } from "../../store";
 import CartListItem from "./CartListItem";
 
-const CartList = () => {
+const CartList: React.FC = () => {
     const items = useSelector((state: RootState) => state.cart.items);
 
     const removeDuplicates = (arr: CartItem[]) => {

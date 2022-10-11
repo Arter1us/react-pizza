@@ -1,15 +1,15 @@
 import { useSelector, useDispatch } from "react-redux";
 import {
     addItem,
-    CartItem,
     decrementItem,
     removeItem,
-} from "../../redux/CartListSlice";
+} from "../../redux/Cart/CartListSlice";
 import { RootState } from "../../store";
 
 import cartListInc from "../../resources/img/inc.svg";
 import cartListDeleteItem from "../../resources/img/delete.svg";
 import classNames from "classnames";
+import { CartItem } from "../../redux/Cart/types";
 
 type CartListItemProps = {
     id: string;

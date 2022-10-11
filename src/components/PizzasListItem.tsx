@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
 
-import { addItem, CartItem } from "../redux/CartListSlice";
+import { addItem } from "../redux/Cart/CartListSlice";
 import { RootState } from "../store";
+import { CartItem } from "../redux/Cart/types";
 
 type PizzasListItemProps = {
     id: string;

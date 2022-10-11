@@ -1,9 +1,10 @@
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { openSortChanged, SortStatus, sortStatusChanged } from "../redux/SortSlice";
+import { openSortChanged, sortStatusChanged } from "../redux/Sort/SortSlice";
 import { RootState } from "../store";
 
 import triangle from "../resources/img/triangle.svg";
+import { SortStatus } from "../redux/Sort/types";
 
 export const list: SortStatus[] = [
     { name: "популярности", sortProperty: "rating" },
@@ -12,7 +13,9 @@ export const list: SortStatus[] = [
 ];
 
 const Sort: React.FC = () => {
-    const openSortPopup = useSelector((state: RootState) => state.sort.openSortPopup);
+    const openSortPopup = useSelector(
+        (state: RootState) => state.sort.openSortPopup
+    );
     const sortStatus = useSelector((state: RootState) => state.sort.sortStatus);
     const dispatch = useDispatch();
     const sortRef = useRef<HTMLDivElement>(null);
@@ -24,7 +27,10 @@ const Sort: React.FC = () => {
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
+            if (
+                sortRef.current &&
+                !event.composedPath().includes(sortRef.current)
+            ) {
                 dispatch(openSortChanged(false));
             }
         };

@@ -3,18 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import qs from "qs";
 
-import {
-    fetchPizzas,
-    currentPageChanged,
-    PizzasItem,
-} from "../redux/PizzasSlice";
-import { sortStatusChanged } from "../redux/SortSlice";
-import { filtersChanged } from "../redux/CategoriesSlice";
+import { fetchPizzas, currentPageChanged } from "../redux/Pizzas/PizzasSlice";
+import { sortStatusChanged } from "../redux/Sort/SortSlice";
+import { filtersChanged } from "../redux/Categories/CategoriesSlice";
 import PizzasListItem from "./PizzasListItem";
 import PizzasListSkeleton from "./Skeletons/PizzasListSkeleton";
 import Pagination from "./Pagination";
 import { list } from "./Sort";
 import { RootState, useAppDispatch } from "../store";
+import { PizzasItem } from "../redux/Pizzas/types";
 
 const PizzasList = () => {
     const { pizzas, pizzasLoadingStatus, currentPage } = useSelector(

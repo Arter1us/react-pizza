@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { clearCart } from "../../redux/CartListSlice";
+import { clearCart } from "../../redux/Cart/CartListSlice";
 
 import cartImg from "../../resources/img/cart.png";
 import trash from "../../resources/img/trash.svg";
