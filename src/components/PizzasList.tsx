@@ -13,7 +13,7 @@ import { list } from "./Sort";
 import { RootState, useAppDispatch } from "../store";
 import { PizzasItem } from "../redux/Pizzas/types";
 
-const PizzasList = () => {
+const PizzasList: React.FC = () => {
     const { pizzas, pizzasLoadingStatus, currentPage } = useSelector(
         (state: RootState) => state.pizzas
     );

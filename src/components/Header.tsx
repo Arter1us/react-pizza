@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Search from "./Search";
@@ -6,9 +7,18 @@ import { RootState } from "../store";
 import reactPizza from "../resources/img/pizza.svg";
 import cartButton from "../resources/img/cart_button.svg";
 
-const Header = () => {
+const Header: React.FC = () => {
     const { totalPrice, items } = useSelector((state: RootState) => state.cart);
     const location = useLocation();
+    const isMounted = useRef(false);
+
+    useEffect(() => {
+        if (isMounted.current) {
+            const json = JSON.stringify(items);
+            localStorage.setItem("cart", json);
+        }
+        isMounted.current = true;
+    }, [items]);
 
     return (
         <header className="header">

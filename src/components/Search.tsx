@@ -7,7 +7,7 @@ import { RootState } from "../store";
 import search from "../resources/img/search.svg";
 import cancel from "../resources/img/cancel.svg";
 
-const Search = () => {
+const Search: React.FC = () => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const searchValue = useSelector(

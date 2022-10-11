@@ -11,7 +11,7 @@ import CategoriesSkeleton from "./Skeletons/CategoriesSkeleton";
 import { RootState, useAppDispatch } from "../store";
 import { FiltersItem } from "../redux/Categories/types";
 
-const Categories = () => {
+const Categories: React.FC = () => {
     const filtersSelector = createSelector(
         (state: RootState) => state.filters.filters,
         (filters) => {
